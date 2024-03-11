@@ -1,23 +1,26 @@
 document.addEventListener('DOMContentLoaded', function() {
     const wrapper = document.querySelector('#wrapper');
-    const question = document.querySelector('#question');
     const yes = document.querySelector('#yes');
     const no = document.querySelector('#no');
+    const question = document.querySelector('#question');
 
-    // Ensure all elements are found before proceeding
-    if (wrapper && question && yes && no) {
-        const wrapperRect = wrapper.getBoundingClientRect();
-        const noRect = no.getBoundingClientRect();
-
+    if (wrapper && yes && no && question) {
         yes.addEventListener('click', () => {
             question.innerHTML = 'I Love You Too';
         });
 
         no.addEventListener('mouseover', () => {
-            const i = Math.floor(Math.random() * (wrapperRect.width - noRect.width)) + 1;
-            const j = Math.floor(Math.random() * (wrapperRect.height - noRect.height)) + 1;
-            no.style.left = i + 'px';
-            no.style.top = j + 'px';
+            const wrapperRect = wrapper.getBoundingClientRect();
+            const noRect = no.getBoundingClientRect();
+
+            const wrapperWidth = wrapperRect.width - noRect.width;
+            const wrapperHeight = wrapperRect.height - noRect.height;
+
+            const randomLeft = Math.floor(Math.random() * wrapperWidth);
+            const randomTop = Math.floor(Math.random() * wrapperHeight);
+
+            no.style.left = randomLeft + 'px';
+            no.style.top = randomTop + 'px';
         });
     } else {
         console.error('One or more elements not found');
